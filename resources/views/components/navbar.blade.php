@@ -33,7 +33,7 @@
                     method="POST"
                     action="{{route('logout')}}">
                     @csrf
-                    <button class="nav-link" type="submit"><i class="bi  bi-door-open-fill"></i></button>
+                    <button class="nav-link" type="submit"><i class="bi fs-3 bi-door-open-fill"></i></button>
                 </form>
             </li>
         </ul>
