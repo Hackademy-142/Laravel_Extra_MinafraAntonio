@@ -426,3 +426,8 @@ url(https://static.xx.fbcdn.net/rsrc.php/v3/yX/r/QryT_9DQQgy.png);
 #img {
     display: none;
 }
+
+.tag {
+    max-height: 30px;
+    font-size: medium;
+}

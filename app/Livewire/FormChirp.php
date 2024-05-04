@@ -2,8 +2,10 @@
 
 namespace App\Livewire;
 
+use App\Models\Tag;
 use App\Models\Chirp;
 use Livewire\Component;
+use Illuminate\Http\Request;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithFileUploads; // Importa il trait WithFileUploads
@@ -22,25 +24,31 @@ class FormChirp extends Component
     {
         $this->validate();
 
-        $this->validate([
-            'img' => 'image|max:1024', // Validazione per il caricamento dell'immagine
-        ]);
+        $path = $this->img ? $this->img->store('public') : null; // Salva l'immagine nella directory 'public'
 
-        $path = $this->img->store('public'); // Salva l'immagine nella directory 'public'
-
-        Chirp::create([
+        $chirp = Chirp::create([
             'content' => $this->content,
             'img' => $path, // Salva il percorso dell'immagine nel database
             'user_id' => Auth::user()->id
         ]);
 
-        session()->flash('message', 'Articolo creato');
+        /* $chirp->tags()->attach($request->tags); */
+
+        session()->flash('message', 'Post creato');
         $this->reset();
+    }
+
+    public $name;
+
+    public function storeTag(){
+
+        Tag::create([
+            'name' => $this->name,
+        ]);
     }
 
     public function render()
     {
-        $chirps = Chirp::all();
-        return view('livewire.form-chirp', compact('chirps'));
+        return view('livewire.form-chirp');
     }
 }
