@@ -6,11 +6,14 @@ use App\Models\Chirp;
 use Livewire\Component;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Auth;
+use Livewire\WithFileUploads; // Importa il trait WithFileUploads
 
 class FormChirp extends Component
 {
-    #[Validate('required', message: 'Il campo è obligatorio.')]
-    #[Validate('min:5', message: 'Il titolo deve avere almeno 3 caratteri.')]
+    use WithFileUploads; // Utilizza il trait WithFileUploads
+
+    #[Validate('required', message: 'Il campo è obbligatorio.')]
+    #[Validate('min:5', message: 'Il titolo deve avere almeno 5 caratteri.')]
     public $content;
 
     public $img;
@@ -19,9 +22,15 @@ class FormChirp extends Component
     {
         $this->validate();
 
+        $this->validate([
+            'img' => 'image|max:1024', // Validazione per il caricamento dell'immagine
+        ]);
+
+        $path = $this->img->store('public'); // Salva l'immagine nella directory 'public'
+
         Chirp::create([
             'content' => $this->content,
-            'img' => $this->img,
+            'img' => $path, // Salva il percorso dell'immagine nel database
             'user_id' => Auth::user()->id
         ]);
 
@@ -31,6 +40,7 @@ class FormChirp extends Component
 
     public function render()
     {
-        return view('livewire.form-chirp');
+        $chirps = Chirp::all();
+        return view('livewire.form-chirp', compact('chirps'));
     }
 }
