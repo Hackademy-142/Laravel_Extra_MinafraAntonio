@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use App\Models\Chirp;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,8 @@ class PublicController extends Controller
         return view('welcome');
     }
 
-    public function edit(Chirp $chirp){
+    public function edit(Chirp $chirp)
+    {
 
         return view('edit-form', compact('chirp'));
     }

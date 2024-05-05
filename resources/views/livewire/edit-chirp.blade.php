@@ -1,5 +1,4 @@
 <div>
-
     <x-display-message/>
 
     <div class="container my-5">
@@ -13,7 +12,7 @@
                             <div class="post-header">
                                 <div class="profile-pic"></div>
                                 <div class="user-info">
-                                    <div class="full-name">nome</div>
+                                    <div class="full-name">{{$chirp->user->name}}</div>
                                 </div>
                             </div>
                             <div class="post-content">
@@ -24,6 +23,11 @@
                             </textarea>
                             <div class="text-danger">@error('title') {{ $message }} @enderror</div>
 
+                            <div class="hashtag">
+                                <input wire:model="name" class="border tag rounded-2 w-75 h-25" wire:model.blur="tag" id="tag">
+                                <i class="bi fs-4 bi-hash"></i>
+                            </div>
+
                             <div class="emoji-picker">
                                 <emoji-picker class="light"></emoji-picker>
                                 <i class="emoji" aria-label="Insert an emoji"
@@ -32,12 +36,11 @@
                             <div class="add-to-your-post">
                                 <span class="add-to-post-text">Add to your post</span>
                                 <div class="add-to-post-icons">
-                                    <div class="photo-video">
 
+                                    <div class="photo-video">
                                         <input wire:model="img" type="file" class="form-control" id="img">
                                         <label for="img" class="file-label"><i class="bi fs-4 photo-video bi-image-fill"></i></label>
                                         <div class="text-danger">@error('title') {{ $message }} @enderror</div>
-
                                     </div>
                                 </div>
                             </div>

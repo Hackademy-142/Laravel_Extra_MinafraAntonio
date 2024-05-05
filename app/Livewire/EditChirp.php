@@ -2,7 +2,10 @@
 
 namespace App\Livewire;
 
+use App\Models\Tag;
+use App\Models\Chirp;
 use Livewire\Component;
+use Illuminate\Http\Request;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Validate;
 
@@ -18,6 +21,10 @@ class EditChirp extends Component
 
     public $chirp;
 
+    public $name;
+
+    public $tag;
+
     public function mount (){
         $this->content = $this->chirp->content;
         $this->img = $this->chirp->img;
@@ -25,6 +32,7 @@ class EditChirp extends Component
 
     public function updateChirp()
 {
+
     $this->validate();
 
     // Inizializzo una variabile per il percorso dell'immagine
@@ -42,7 +50,24 @@ class EditChirp extends Component
         'img' => $path,
     ]);
 
-    $this->reset();
+    if(empty($this->name)){
+        $id = null;
+    } elseif (!Tag::where('name', $this->name)->exists()){
+
+        $tag= Tag::create([
+            'name' => $this->name
+        ]);
+
+        $id = $tag['id'];
+
+    }else{
+        $tag = Tag::where('name' ,$this->name)->first();
+        $id = $tag->id;
+
+    }
+    $this->chirp->tags()->sync($id);
+
+    /* $this->reset(); */
 
     session()->flash('message', 'Articolo aggiornato correttamente');
 }
@@ -51,6 +76,8 @@ class EditChirp extends Component
 
     public function render()
     {
-        return view('livewire.edit-chirp');
+        $tags = Tag::all();
+
+        return view('livewire.edit-chirp', compact('tags'));
     }
 }

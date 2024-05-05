@@ -13,7 +13,7 @@
                             <div class="post-header">
                                 <div class="profile-pic"></div>
                                 <div class="user-info">
-                                    <div class="full-name">nome</div>
+                                    <div class="full-name">{{$user->name}}</div>
                                 </div>
                             </div>
                             <div class="post-content">
@@ -22,14 +22,9 @@
                                 placeholder="What's on you mind, Geek?">
                             </textarea>
                             <div class="text-danger">@error('title') {{ $message }} @enderror</div>
-
                             <div class="hashtag">
-                                <form wire:submit='storeTag'>
                                         <input wire:model="name" class="border tag rounded-2 w-75 h-25" wire:model.blur="tag" id="tag">
-                                        <button type="submit" class="btn">
-                                            <i class="bi fs-4 bi-hash"></i>
-                                        </button>
-                                </form>
+                                        <i class="bi fs-4 bi-hash"></i>
                             </div>
                             <div class="add-to-your-post">
                                 <span class="add-to-post-text">Add to your post</span>
