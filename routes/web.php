@@ -7,3 +7,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PublicController::class, 'home'])->name('home')->middleware('auth');
 
 Route::get('/edit/{chirp}', [PublicController::class, 'edit'])->name('edit')->middleware('auth');
+
+Route::get('/profile', [PublicController::class, 'showProfile'])->name('show.profile')->middleware('auth');

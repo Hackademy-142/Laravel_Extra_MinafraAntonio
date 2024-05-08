@@ -13,7 +13,7 @@
   <div class="container mt-5">
     <div class="row justify-content-center ">
       <div class="col-12 col-md-6">
-        <form class="p-3 shadow rounded bg-secondary-subtle" method="post" action="{{route('register')}}">
+        <form class="p-3 shadow rounded bg-secondary-subtle" method="post" action="{{route('register')}}" enctype="multipart/form-data">
           @csrf
           <div class="mb-3">
             <label for="email" class="form-label">email</label>
@@ -22,6 +22,10 @@
           <div class="mb-3">
             <label for="nome" class="form-label">nome</label>
             <input type="text" name="name" class="form-control" id="nome">
+          </div>
+          <div class="mb-3">
+            <label for="img" class="form-label"><i class="bi fs-4 photo-video bi-image-fill"></i> Aggiungi immagine profilo</label>
+            <input type="file" name="img" class="form-control" id="img">
           </div>
           <div class="mb-3">
             <label for="password_confirmation" class="form-label">Password</label>

@@ -25,6 +25,9 @@
           </div>
           <button type="submit" class="btn btn_custom">Accedi</button>
         </form>
+        <div class=" my-4">
+          <a class="text-dark" href="{{route('register')}}">Non hai un account? Registrati!</a>
+        </div>
       </div>
     </div>
   </div>

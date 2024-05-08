@@ -12,7 +12,7 @@
                         <section class="create-post">
                             <div class="post-header">
                                 <div>
-                                    <img src="{{$user->img}}" class="profile-pic" alt="">
+                                    <img src="{{Storage::url($user->img)}}" class="profile-pic" alt="">
                                 </div>
                                 <div class="user-info">
                                     <div class="full-name">{{$user->name}}</div>
